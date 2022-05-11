@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: hsl(218, 23%, 16%);
+    }
+
+    .card {
+      background: hsl(217, 19%, 24%);
+      border-radius: 1.4rem;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      padding-bottom: 6rem;
+      width: 50rem;
+    }
+
+    @media  screen and (max-width:600px) {
+      .card{
+        width: 80%;
+      }
+    }
+
+    .advice-id {
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: .3rem;
+      color: hsl(150, 100%, 66%);
+      font-weight: 800;
+    }
+
+    .advice-body {
+      font-size: 2.4rem;
+      color: hsl(193, 38%, 86%);
+      text-align: center;
+      margin: 2.7rem;
+      width: 70%;
+    }
+
+    .card-footer {
+      position: absolute;
+      bottom: 5rem;
+    }
+
+    .card-footer img {
+      width: 100%;
+    }
+
+    .card-dice-img {
+      background: hsl(150, 100%, 66%);
+      border-radius: 50%;
+      padding: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      bottom: -3rem;
+      left: 45%;
+      transition: all .3s ease-in-out;
+    }
+
+    .card-dice-img:hover{
+      box-shadow: 0rem 0rem 1rem 0 hsl(150, 100%, 66%);
+    }
+  </style>
+</head>
+<div class="container">
+  <div class="card">
+    <div class="advice-id">
+      <!-- Advice ID goes here -->
+    </div>
+    <div class="advice-body">
+      <!-- Advice Body goes here -->
+    </div>
+    <div class="card-footer">
+      <img src="./images/pattern-divider-desktop.svg" alt="">
+    </div>
+    <div class="card-dice-img">
+      <img src="./images/icon-dice.svg" alt="">
+    </div>
+  </div>
+</div>
+
+<script>
+  // how to perfrom an api call in js ('https://api.adviceslip.com/advice')
+  const getAdvice = async () => {
+    const response = await fetch('https://api.adviceslip.com/advice')
+    const data = await response.json()
+    document.querySelector('.advice-body').innerHTML = `<h3>"${data.slip.advice}"</h3>`
+    document.querySelector('.advice-id').innerText = `Advice #${data.slip.id}`
+  }
+  window.onload = getAdvice;
+</script>
+</body>
+
+</html>
